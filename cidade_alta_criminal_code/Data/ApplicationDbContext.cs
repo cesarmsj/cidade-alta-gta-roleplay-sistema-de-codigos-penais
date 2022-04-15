@@ -24,5 +24,7 @@ namespace cidade_alta_criminal_code.Data
             builder.Entity<Status>().HasKey(t => t.Id);
             
         }
+
+        public DbSet<cidade_alta_criminal_code.Models.CriminalCode> CriminalCode { get; set; }
     }
 }
