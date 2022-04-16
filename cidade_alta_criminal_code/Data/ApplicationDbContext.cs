@@ -1,10 +1,12 @@
 ﻿using cidade_alta_criminal_code.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using cidade_alta_criminal_code.Data.Dtos.UserDto;
 
 namespace cidade_alta_criminal_code.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,6 +27,10 @@ namespace cidade_alta_criminal_code.Data
             
         }
 
-        public DbSet<cidade_alta_criminal_code.Models.CriminalCode> CriminalCode { get; set; }
+        public DbSet<cidade_alta_criminal_code.Models.CriminalCode> CriminalCodes { get; set; }
+
+        public DbSet<cidade_alta_criminal_code.Models.Status> Status { get; set; }
+
+        public DbSet<cidade_alta_criminal_code.Data.Dtos.UserDto.CreateUserDto> CreateUserDto { get; set; }
     }
 }

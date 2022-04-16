@@ -9,7 +9,6 @@ namespace cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto
         [Required(ErrorMessage = "O campo nome é obrigatório")]
         public string Name { get; set; }
 
-        
         public string Description { get; set; }
 
         [Required(ErrorMessage = "O campo penalidade é obrigatório")]

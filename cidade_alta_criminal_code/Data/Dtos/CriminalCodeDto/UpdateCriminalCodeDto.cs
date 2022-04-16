@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using cidade_alta_criminal_code.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto
