@@ -17,8 +17,10 @@ namespace cidade_alta_criminal_code.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(String msg)
         {
+            ViewBag.Message = msg;
+
             return View();
         }
 
@@ -29,10 +31,12 @@ namespace cidade_alta_criminal_code.Controllers
             Result result = _registerService.RegisterUser(createDto);
             if (result.IsFailed) {
                 _logger.LogInformation("Houve uma falha ao tentar cadastrar novo usuário.");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Register", new { msg = "fail"});
+                //return Json(false);
             };
             _logger.LogInformation("O usuário criou uma nova conta com senha");
-            return RedirectToAction("Index", "Home"); 
+            return RedirectToAction("Index", "Register",new { msg = "success"}); 
+            //return Json(true);
            
         }
 

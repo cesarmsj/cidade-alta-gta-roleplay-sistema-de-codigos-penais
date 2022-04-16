@@ -5,6 +5,7 @@ using cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto;
 using cidade_alta_criminal_code.Services;
 using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 
 namespace cidade_alta_criminal_code.Controllers
 {
@@ -21,6 +22,7 @@ namespace cidade_alta_criminal_code.Controllers
          }
 
         // GET: CriminalCodes
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             List<ReadCriminalCodeDto> readDto = _criminalCodeService.ListCriminalCodes();

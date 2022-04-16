@@ -13,12 +13,14 @@ namespace cidade_alta_criminal_code.Controllers
             _logoutService = logoutService;
         }
 
-        [HttpPost]
         public IActionResult Logout()
         {
             Result result = _logoutService.LogoutUser();
-            if (result.IsFailed) return Unauthorized(result.Errors);
-            return Ok(result.Successes);
+            if (result.IsFailed)
+            {
+                return Unauthorized(result.Errors);
+            }
+            return RedirectToAction("Index", "Login");
         }
      }
 }

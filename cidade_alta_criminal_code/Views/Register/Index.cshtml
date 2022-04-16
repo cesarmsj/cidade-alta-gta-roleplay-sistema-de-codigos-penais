@@ -4,9 +4,19 @@
     ViewData["Title"] = "Cadastro de Usuário ";
 }
 
+@if (ViewBag.Message == "success")
+{
+    <span class="text-success">Usuário cadastrado com sucesso</span>
+}
+else if (ViewBag.Message == "fail")
+{
+    <span class="text-danger">Falha ao tentar cadastrar o usuário</span>
+}
+
 <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="color: midnightblue">
-        <form asp-controller="Register" asp-action="RegisterUser" data-ajax="true" data-ajax-method="POST" enctype="multipart/form-data" style="margin-top: 80px">
+        <form asp-controller="Register" asp-action="RegisterUser" data-ajax="true" data-ajax-method="POST"
+        data-ajax-success="onSuccess" enctype="multipart/form-data" style="margin-top: 80px">
             <h6 class="text-center" style="font-size: 22px; color: darkslateblue"><b>Criar uma nova conta de usuário.</b></h6>
 
             <div class="form-group">
@@ -36,3 +46,14 @@
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
+
+<script>
+    function onSuccess(data){
+        if(data) {
+            alert("Usuário cadastrado com sucesso.");
+        } else
+        {
+            alert("Falha ao cadastrar o usuário")
+        }
+    }
+</script>
