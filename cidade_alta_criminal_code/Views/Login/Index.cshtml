@@ -1,23 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model cidade_alta_criminal_code.Data.Requests.LoginRequest
+
 @{
+    ViewData["Title"] = "Login";
 }
 
 <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="color: midnightblue">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data" style="margin-top: 80px">
+        <!--<form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data" style="margin-top: 80px">-->
+        <form asp-controller="Login" asp-action="SignInUser" data-ajax="true" data-ajax-method="POST" enctype="multipart/form-data" style="margin-top: 80px">
             <h6 class="text-center" style="font-size: 22px; color: darkslateblue"><b>Entrar no sistema.</b></h6>
 
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label >Usuário: </label>
-                <input  class="form-control" />
+                <label asp-for="UserName">Usuário: </label>
+                <input asp-for="UserName" class="form-control" />
                 <span class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label >Senha:</label>
-                <input class="form-control" />
+                <label asp-for="Password">Senha:</label>
+                <input asp-for="Password" class="form-control" />
                 <span class="text-danger"></span>
             </div>
             <div class="form-group">

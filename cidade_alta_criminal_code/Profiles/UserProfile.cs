@@ -11,7 +11,6 @@ namespace cidade_alta_criminal_code.Profiles
         {
             CreateMap<CreateUserDto, User>();
             CreateMap<User, IdentityUser<int>>();
-           //CreateMap<User, ReadUserDto>();
         }
        
     }

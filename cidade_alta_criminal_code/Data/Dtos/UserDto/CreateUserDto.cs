@@ -5,17 +5,15 @@ namespace cidade_alta_criminal_code.Data.Dtos.UserDto
 {
     public class CreateUserDto
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Informe o nome de usuário")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Informe uma senha")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Confirme a senha")]
+        [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "As senhas não coincidem")]
         public string PasswordConfirmation { get; set; }
 

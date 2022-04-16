@@ -17,8 +17,6 @@ namespace cidade_alta_criminal_code.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<User>().HasKey(t => t.Id);
-
             builder.Entity<CriminalCode>().HasKey(t => t.Id);
             builder.Entity<CriminalCode>().HasOne(t => t.CreateUser).WithMany(t => t.CreateUsers).HasForeignKey(t => t.CreateUserId).OnDelete(DeleteBehavior.ClientCascade);
             builder.Entity<CriminalCode>().HasOne(t => t.UpdateUser).WithMany(t => t.UpdateUsers).HasForeignKey(t => t.UpdateUserId).OnDelete(DeleteBehavior.ClientCascade);
@@ -31,6 +29,5 @@ namespace cidade_alta_criminal_code.Data
 
         public DbSet<cidade_alta_criminal_code.Models.Status> Status { get; set; }
 
-        public DbSet<cidade_alta_criminal_code.Data.Dtos.UserDto.CreateUserDto> CreateUserDto { get; set; }
     }
 }

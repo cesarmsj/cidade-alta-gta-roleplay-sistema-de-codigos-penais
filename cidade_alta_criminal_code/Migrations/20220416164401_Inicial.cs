@@ -13,7 +13,8 @@ namespace cidade_alta_criminal_code.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -27,7 +28,8 @@ namespace cidade_alta_criminal_code.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -81,7 +83,7 @@ namespace cidade_alta_criminal_code.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -102,7 +104,7 @@ namespace cidade_alta_criminal_code.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -124,7 +126,7 @@ namespace cidade_alta_criminal_code.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,8 +143,8 @@ namespace cidade_alta_criminal_code.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,7 +167,7 @@ namespace cidade_alta_criminal_code.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -182,7 +184,7 @@ namespace cidade_alta_criminal_code.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CriminalCode",
+                name: "CriminalCodes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -193,17 +195,29 @@ namespace cidade_alta_criminal_code.Migrations
                     PrisionTime = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateUserId = table.Column<int>(type: "int", nullable: false),
+                    UpdateUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CriminalCode", x => x.Id);
+                    table.PrimaryKey("PK_CriminalCodes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CriminalCode_Status_StatusID",
+                        name: "FK_CriminalCodes_Status_StatusID",
                         column: x => x.StatusID,
                         principalTable: "Status",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CriminalCodes_User_CreateUserId",
+                        column: x => x.CreateUserId,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CriminalCodes_User_UpdateUserId",
+                        column: x => x.UpdateUserId,
+                        principalTable: "User",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -246,10 +260,20 @@ namespace cidade_alta_criminal_code.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CriminalCode_StatusID",
-                table: "CriminalCode",
+                name: "IX_CriminalCodes_CreateUserId",
+                table: "CriminalCodes",
+                column: "CreateUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CriminalCodes_StatusID",
+                table: "CriminalCodes",
                 column: "StatusID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CriminalCodes_UpdateUserId",
+                table: "CriminalCodes",
+                column: "UpdateUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -270,10 +294,7 @@ namespace cidade_alta_criminal_code.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CriminalCode");
-
-            migrationBuilder.DropTable(
-                name: "User");
+                name: "CriminalCodes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -283,6 +304,9 @@ namespace cidade_alta_criminal_code.Migrations
 
             migrationBuilder.DropTable(
                 name: "Status");
+
+            migrationBuilder.DropTable(
+                name: "User");
         }
     }
 }

@@ -26,6 +26,8 @@ builder.Services.Configure<IdentityOptions>(options =>
       options.Password.RequiredLength = 8;
   }
 );
+builder.Services.AddLogging();
+builder.Services.AddSingleton(typeof(ILogger), typeof(Logger<ApplicationDbContext>));
 builder.Services.AddControllersWithViews();
 
 

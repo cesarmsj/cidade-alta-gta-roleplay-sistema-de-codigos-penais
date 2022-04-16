@@ -18,7 +18,7 @@ namespace cidade_alta_criminal_code.Services
 
         public Result SignInUser(LoginRequest request)
         {
-            var resultIdentity = _signInManager.PasswordSignInAsync(request.Username, request.Password, false, false);
+            var resultIdentity = _signInManager.PasswordSignInAsync(request.UserName, request.Password, false, false);
 
             if (resultIdentity.Result.Succeeded)
             {
@@ -26,7 +26,7 @@ namespace cidade_alta_criminal_code.Services
                     .UserManager
                     .Users
                     .FirstOrDefault(usuario =>
-                    usuario.NormalizedUserName == request.Username.ToUpper());
+                    usuario.NormalizedUserName == request.UserName.ToUpper());
                 Token token = _tokenService.CreateToken(identityUser);
                 return Result.Ok().WithSuccess(token.Value);
             }
