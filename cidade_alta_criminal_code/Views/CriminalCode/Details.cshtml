@@ -11,49 +11,49 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            Nome
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.Name
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            Descrição
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.Description
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Penalty)
+            Penalidade
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.Penalty
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrisionTime)
+            Tempo de Prisão
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.PrisionTime
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            Data de Criação
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.CreatedDate
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedDate)
+            Data de Atualização
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.UpdatedDate
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateUser)
+            Quem criou
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.CreateUser.UserName
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateUser)
+            Quem atualizou
         </dt>
         <dd class = "col-sm-10">
             @ViewBag.CriminalCode.UpdateUser.UserName
@@ -61,6 +61,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@ViewBag.CriminalCode.Id">Atualizar</a> |
+    <a asp-action="Index">Voltar para lista</a>
 </div>

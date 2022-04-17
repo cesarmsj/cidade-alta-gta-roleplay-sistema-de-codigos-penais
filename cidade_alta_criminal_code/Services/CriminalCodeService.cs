@@ -54,7 +54,7 @@ namespace cidade_alta_criminal_code.Services
             // _mapper.Map(criminalCodeDto, criminalCode);
             criminalCode.Name = criminalCodeDto.Name;
             criminalCode.Description = criminalCodeDto.Description;
-            criminalCode.Penalty = criminalCodeDto.Penalty;
+            criminalCode.Penalty = criminalCodeDto.Penalty / 100;
             criminalCode.PrisionTime = criminalCodeDto.PrisionTime;
             criminalCode.StatusId = criminalCodeDto.StatusId;
             criminalCode.UpdateUserId = userId;

@@ -56,7 +56,7 @@ else if (ViewBag.Message == "delfail")
                 @item.Description
             </td>
             <td>
-                @item.Penalty
+                R$ @item.Penalty.ToString().Replace(',','.')
             </td>
             <td>
                 @item.PrisionTime
