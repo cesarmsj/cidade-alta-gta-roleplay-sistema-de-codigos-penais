@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using cidade_alta_criminal_code.Data.Dtos.StatusDto;
 using Microsoft.AspNetCore.Identity;
 using cidade_alta_criminal_code.Models;
+using System.Globalization;
 
 namespace cidade_alta_criminal_code.Controllers
 {
@@ -95,7 +96,7 @@ namespace cidade_alta_criminal_code.Controllers
 
         
         // GET: CriminalCodes/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(string msg, int id)
         {    
 
             var criminalCode = _criminalCodeService.Details(id);
@@ -103,8 +104,9 @@ namespace cidade_alta_criminal_code.Controllers
             {
                 return NotFound();
             }
-            //ViewData["CreateUserId"] = new SelectList(_context.Set<User>(), "Id", "Id", criminalCode.CreateUserId);
-            //ViewData["UpdateUserId"] = new SelectList(_context.Set<User>(), "Id", "Id", criminalCode.UpdateUserId);
+
+            List<ReadStatusDto> readDto = _statusService.ListStatus();
+            ViewBag.Status = readDto;
             ViewBag.CriminalCode = criminalCode;
 
             return View();
@@ -116,12 +118,20 @@ namespace cidade_alta_criminal_code.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [FromBody] UpdateCriminalCodeDto criminalCodeDto)
+        public IActionResult Edit(int criminalCodeId, UpdateCriminalCodeDto criminalCodeDto)
         {
-            Result resultado = _criminalCodeService.UpdateCriminalCode(id, criminalCodeDto);
-            
-            if (resultado.IsFailed) return NotFound();
-            return NoContent();
+            var userId = _userManager.GetUserId(User);
+
+            Result result = _criminalCodeService.UpdateCriminalCode(criminalCodeId, criminalCodeDto, userId);
+
+            if (result.IsFailed)
+            {
+                _logger.LogInformation("Falha ao tentar atualizar código penal.");
+                return RedirectToAction("Edit", "CriminalCode", new { msg = "fail", id = criminalCodeId });
+
+            };
+            _logger.LogInformation("Código Penal atualizado com Sucesso");
+            return RedirectToAction("Edit", "CriminalCode", new { msg = "success", id = criminalCodeId });
 
         }
 

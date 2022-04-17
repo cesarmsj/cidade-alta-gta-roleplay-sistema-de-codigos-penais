@@ -1,4 +1,5 @@
-﻿@model cidade_alta_criminal_code.Models.CriminalCode
+﻿@using System.Globalization
+@model cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto.UpdateCriminalCodeDto
 
 @{
     ViewData["Title"] = "Editar Código Penal";
@@ -10,58 +11,39 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <!--
-                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            -->
-            <input type="hidden" asp-for="Id" />
+        <form asp-controller="CriminalCode" asp-action="Edit" method="post">
+            <input type="hidden" name="criminalCodeId" value="@ViewBag.CriminalCode.Id" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name" class="control-label">Nome</label>
+                <input asp-for="Name" class="form-control" value="@ViewBag.CriminalCode.Name"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <label asp-for="Description" class="control-label">Descrição</label>
+                <input asp-for="Description" class="form-control" value="@ViewBag.CriminalCode.Description"/>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Penalty" class="control-label"></label>
-                <input asp-for="Penalty" class="form-control" />
+                <label asp-for="Penalty" class="control-label">Penalidade</label>
+                <input asp-for="Penalty" class="form-control" value="@ViewBag.CriminalCode.Penalty" />
                 <span asp-validation-for="Penalty" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PrisionTime" class="control-label"></label>
-                <input asp-for="PrisionTime" class="form-control" />
+                <label asp-for="PrisionTime" class="control-label">Tempo de Prisão</label>
+                <input asp-for="PrisionTime" class="form-control" value="@ViewBag.CriminalCode.PrisionTime" />
                 <span asp-validation-for="PrisionTime" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="StatusId" class="control-label"></label>
-                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusID"></select>
-                <span asp-validation-for="StatusId" class="text-danger"></span>
+            <div class="form-group mb-2">
+                <label asp-for="StatusId" class="control-label">Status</label>
+                <select asp-for="StatusId" class ="form-control">
+                    <option value="@ViewBag.CriminalCode.Status.Id" selected>@ViewBag.CriminalCode.Status.Name</option>
+                    @foreach (var item in ViewBag.Status) {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedDate" class="control-label"></label>
-                <input asp-for="UpdatedDate" class="form-control" />
-                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateUserId" class="control-label"></label>
-                <select asp-for="CreateUserId" class="form-control" asp-items="ViewBag.CreateUserId"></select>
-                <span asp-validation-for="CreateUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdateUserId" class="control-label"></label>
-                <select asp-for="UpdateUserId" class="form-control" asp-items="ViewBag.UpdateUserId"></select>
-                <span asp-validation-for="UpdateUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -20,18 +20,15 @@ namespace cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto
         public int PrisionTime { get; set; }
 
         [Required(ErrorMessage = "O campo de status é obrigatório")]
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
         public DateTime UpdatedDate { get; set; }
 
-        public int CreateUserId { get; set; }
+        public string CreateUserId { get; set; }
 
-        public int UpdateUserId { get; set; }
+        public string UpdateUserId { get; set; }
 
-        public virtual ApplicationUser CreateUser { get; set; }
-
-        public virtual ApplicationUser UpdateUser { get; set; }
     }
 }

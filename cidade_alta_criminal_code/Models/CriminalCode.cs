@@ -10,7 +10,6 @@ namespace cidade_alta_criminal_code.Models
 
         public string Description { get; set; }
 
-        [Precision(6,2)]
         public decimal Penalty { get; set; }
 
         public int PrisionTime  { get; set; }

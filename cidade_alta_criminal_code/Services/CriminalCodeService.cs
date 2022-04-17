@@ -40,17 +40,24 @@ namespace cidade_alta_criminal_code.Services
 
         }
 
-        public Result UpdateCriminalCode(int id, UpdateCriminalCodeDto criminalCodeDto)
+        public Result UpdateCriminalCode(int id, UpdateCriminalCodeDto criminalCodeDto, string userId)
         {
             CriminalCode criminalCode = _context.CriminalCodes.FirstOrDefault(criminalCode => criminalCode.Id == id);
 
             criminalCodeDto.UpdatedDate = DateTime.Now;
+       
 
             if (criminalCode == null)
             {
                 return Result.Fail("Código Criminal não encontrado");
             }
-            _mapper.Map(criminalCodeDto, criminalCode);
+            // _mapper.Map(criminalCodeDto, criminalCode);
+            criminalCode.Name = criminalCodeDto.Name;
+            criminalCode.Description = criminalCodeDto.Description;
+            criminalCode.Penalty = criminalCodeDto.Penalty;
+            criminalCode.PrisionTime = criminalCodeDto.PrisionTime;
+            criminalCode.StatusId = criminalCodeDto.StatusId;
+            criminalCode.UpdateUserId = userId;
             _context.SaveChanges();
             return Result.Ok();
         }
@@ -72,7 +79,10 @@ namespace cidade_alta_criminal_code.Services
 
         public ReadCriminalCodeDto Details(int id)
         {
-            CriminalCode criminalCode = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).FirstOrDefault(criminalCode => criminalCode.Id == id);
+            CriminalCode criminalCode = _context.CriminalCodes.Include(i => i.CreateUser).
+                Include(j => j.UpdateUser).
+                Include(s => s.Status).
+                FirstOrDefault(criminalCode => criminalCode.Id == id);
             if (criminalCode != null)
             {
                 ReadCriminalCodeDto criminalCodeDto = _mapper.Map<ReadCriminalCodeDto>(criminalCode);
