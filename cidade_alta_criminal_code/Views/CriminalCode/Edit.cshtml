@@ -1,17 +1,20 @@
 ﻿@model cidade_alta_criminal_code.Models.CriminalCode
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Editar Código Penal";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>CriminalCode</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Edit">
+            <!--
+                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            -->
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -33,8 +36,9 @@
                 <span asp-validation-for="PrisionTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StatusID" class="control-label"></label>
-                <select asp-for="StatusID" class ="form-control" asp-items="ViewBag.StatusID"></select>
+                <label asp-for="StatusId" class="control-label"></label>
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusID"></select>
+                <span asp-validation-for="StatusId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreatedDate" class="control-label"></label>
@@ -48,21 +52,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateUserId" class="control-label"></label>
-                <select asp-for="CreateUserId" class ="form-control" asp-items="ViewBag.CreateUserId"></select>
+                <select asp-for="CreateUserId" class="form-control" asp-items="ViewBag.CreateUserId"></select>
+                <span asp-validation-for="CreateUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UpdateUserId" class="control-label"></label>
-                <select asp-for="UpdateUserId" class ="form-control" asp-items="ViewBag.UpdateUserId"></select>
+                <select asp-for="UpdateUserId" class="form-control" asp-items="ViewBag.UpdateUserId"></select>
+                <span asp-validation-for="UpdateUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para Códigos Penais Cadastrados</a>
 </div>
 
 @section Scripts {

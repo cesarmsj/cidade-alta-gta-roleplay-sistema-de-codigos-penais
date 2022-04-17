@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Códigos Penais";
+}
+
+@if (ViewBag.Message == "delsuccess")
+{
+    <span class="text-success">Código Penal removido com sucesso</span>
+}
+else if (ViewBag.Message == "delfail")
+{
+    <span class="text-danger">Falha ao tentar cadastrar novo código penal</span>
+}
+
+<h1>Códigos Penais</h1>
+
+<p>
+    <a asp-action="Create">Criar novo código penal</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Penalidade
+            </th>
+            <th>
+                Tempo de Prisão
+            </th>
+            <th>
+                Data de Criação
+            </th>
+            <th>
+                Última Atualização
+            </th>
+            <th>
+                Usuário quem criou
+            </th>
+            <th>
+                Usuário quem atualizou
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in ViewBag.CriminalCodes) {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.Penalty
+            </td>
+            <td>
+                @item.PrisionTime
+            </td>
+            <td>
+                @item.CreatedDate
+            </td>
+            <td>
+                @item.UpdatedDate
+            </td>
+            <td>
+                @item.CreateUser.UserName
+            </td>
+            <td>
+                @item.UpdateUser.UserName
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

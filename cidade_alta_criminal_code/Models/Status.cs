@@ -6,7 +6,7 @@
 
         public string Name { get; set; }
 
-        public virtual CriminalCode CriminalCode { get; set; }
+        public virtual ICollection<CriminalCode> CriminalCodeStatus { get; set; }
 
     }
 }

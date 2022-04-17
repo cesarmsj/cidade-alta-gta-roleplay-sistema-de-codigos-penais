@@ -3,6 +3,8 @@ using cidade_alta_criminal_code.Data;
 using cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto;
 using cidade_alta_criminal_code.Models;
 using FluentResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace cidade_alta_criminal_code.Services
 
@@ -11,28 +13,40 @@ namespace cidade_alta_criminal_code.Services
     {
         private readonly ApplicationDbContext _context;
         private IMapper _mapper;
+        // private UserManager<IdentityUser<int>> _userManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public CriminalCodeService(ApplicationDbContext context, IMapper mapper)
+        // public CriminalCodeService(ApplicationDbContext context, IMapper mapper, UserManager<IdentityUser<int>> userManager)
+        public CriminalCodeService(ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        public ReadCriminalCodeDto CreateCriminalCode(CreateCriminalCodeDto criminalCodeDto)
+        public Result CreateCriminalCode(CreateCriminalCodeDto criminalCodeDto, string userId)
         {
+            criminalCodeDto.CreateUserId = userId;
+            criminalCodeDto.UpdateUserId = userId;
+            criminalCodeDto.CreatedDate = DateTime.Now;
+            criminalCodeDto.UpdatedDate = DateTime.Now;
+            
             CriminalCode criminalCode = _mapper.Map<CriminalCode>(criminalCodeDto);
             _context.CriminalCodes.Add(criminalCode);
-            _context.SaveChanges();
+            int isCreated = _context.SaveChanges();
 
-            return _mapper.Map<ReadCriminalCodeDto>(criminalCode);
+            if (isCreated == 1) return Result.Ok();
+            return Result.Fail("Falha ao cadastrar o usuário");
 
         }
 
         public Result UpdateCriminalCode(int id, UpdateCriminalCodeDto criminalCodeDto)
         {
             CriminalCode criminalCode = _context.CriminalCodes.FirstOrDefault(criminalCode => criminalCode.Id == id);
-            
-            if(criminalCode == null)
+
+            criminalCodeDto.UpdatedDate = DateTime.Now;
+
+            if (criminalCode == null)
             {
                 return Result.Fail("Código Criminal não encontrado");
             }
@@ -45,7 +59,7 @@ namespace cidade_alta_criminal_code.Services
         {
             List<CriminalCode> criminalCodes;
 
-            criminalCodes = _context.CriminalCodes.ToList();
+            criminalCodes = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).ToList();
 
             if (criminalCodes != null)
             {
@@ -58,7 +72,7 @@ namespace cidade_alta_criminal_code.Services
 
         public ReadCriminalCodeDto Details(int id)
         {
-            CriminalCode criminalCode = _context.CriminalCodes.FirstOrDefault(criminalCode => criminalCode.Id == id);
+            CriminalCode criminalCode = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).FirstOrDefault(criminalCode => criminalCode.Id == id);
             if (criminalCode != null)
             {
                 ReadCriminalCodeDto criminalCodeDto = _mapper.Map<ReadCriminalCodeDto>(criminalCode);

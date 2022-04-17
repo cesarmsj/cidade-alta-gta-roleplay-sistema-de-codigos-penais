@@ -9,8 +9,9 @@ namespace cidade_alta_criminal_code.Services
 {
     public class TokenService
     {
-        
-        public Token CreateToken(IdentityUser<int> user)
+
+        // public Token CreateToken(IdentityUser<int> user)
+        public Token CreateToken(ApplicationUser user)
         {
             Claim[] userClaims = new Claim[]
             {

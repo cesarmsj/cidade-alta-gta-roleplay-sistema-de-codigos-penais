@@ -1,4 +1,4 @@
-﻿@model cidade_alta_criminal_code.Models.CriminalCode
+﻿@model cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto.ReadCriminalCodeDto
 
 @{
     ViewData["Title"] = "Details";
@@ -14,49 +14,49 @@
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @ViewBag.CriminalCode.Name
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+            @ViewBag.CriminalCode.Description
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Penalty)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Penalty)
+            @ViewBag.CriminalCode.Penalty
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PrisionTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrisionTime)
+            @ViewBag.CriminalCode.PrisionTime
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CreatedDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
+            @ViewBag.CriminalCode.CreatedDate
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UpdatedDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedDate)
+            @ViewBag.CriminalCode.UpdatedDate
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CreateUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateUser.Id)
+            @ViewBag.CriminalCode.CreateUser.UserName
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UpdateUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdateUser.Id)
+            @ViewBag.CriminalCode.UpdateUser.UserName
         </dd>
     </dl>
 </div>

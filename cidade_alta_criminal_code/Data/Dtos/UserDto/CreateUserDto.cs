@@ -1,5 +1,4 @@
-﻿using cidade_alta_criminal_code.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace cidade_alta_criminal_code.Data.Dtos.UserDto
 {

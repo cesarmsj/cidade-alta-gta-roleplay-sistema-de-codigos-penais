@@ -9,8 +9,8 @@ namespace cidade_alta_criminal_code.Profiles
     {
         public UserProfile()
         {
-            CreateMap<CreateUserDto, User>();
-            CreateMap<User, IdentityUser<int>>();
+            CreateMap<CreateUserDto, ApplicationUser>();
+            CreateMap<ApplicationUser, IdentityUser<int>>();
         }
        
     }

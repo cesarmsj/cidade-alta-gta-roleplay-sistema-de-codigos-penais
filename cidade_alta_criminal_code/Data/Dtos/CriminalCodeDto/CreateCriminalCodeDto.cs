@@ -16,21 +16,19 @@ namespace cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto
         public decimal Penalty { get; set; }
 
         [Required(ErrorMessage = "O campo tempo de prisão é obrigatório")]
+        [Range(0, 30, ErrorMessage = "Informe um número inteiro válido, entre 0 e 30")]
         public int PrisionTime { get; set; }
 
         [Required(ErrorMessage = "O campo de status é obrigatório")]
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
         public DateTime UpdatedDate { get; set; }
 
-        public int CreateUserId { get; set; }
+        public string CreateUserId { get; set; }
 
-        public int UpdateUserId { get; set; }
+        public string UpdateUserId { get; set; }
 
-        public virtual User CreateUser { get; set; }
-
-        public virtual User UpdateUser { get; set; }
     }
 }

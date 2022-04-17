@@ -30,8 +30,8 @@ namespace cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto
 
         public int UpdateUserId { get; set; }
 
-        public virtual User CreateUser { get; set; }
+        public virtual ApplicationUser CreateUser { get; set; }
 
-        public virtual User UpdateUser { get; set; }
+        public virtual ApplicationUser UpdateUser { get; set; }
     }
 }

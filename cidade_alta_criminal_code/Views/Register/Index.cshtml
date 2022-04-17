@@ -15,8 +15,7 @@ else if (ViewBag.Message == "fail")
 
 <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="color: midnightblue">
-        <form asp-controller="Register" asp-action="RegisterUser" data-ajax="true" data-ajax-method="POST"
-        data-ajax-success="onSuccess" enctype="multipart/form-data" style="margin-top: 80px">
+        <form asp-controller="Register" asp-action="RegisterUser" method="post" enctype="multipart/form-data" style="margin-top: 80px">
             <h6 class="text-center" style="font-size: 22px; color: darkslateblue"><b>Criar uma nova conta de usuário.</b></h6>
 
             <div class="form-group">

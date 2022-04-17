@@ -1,14 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
-<!-- inject SignInManager<IdentityUser> SignInManager -->
-<!-- inject UserManager<IdentityUser> UserManager -->
-@inject UserManager<IdentityUser<int>> UserManager
-@inject SignInManager<IdentityUser<int>> SignInManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!-- inject UserManager<IdentityUser<int>> UserManager-->
+<!-- inject SignInManager<IdentityUser<int>> SignInManager-->
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
+    <li class="nav-item me-2">
         Olá @User.Identity?.Name
+    </li>
+    <li class="nav-item me-2">
+        <a  class="form-inline" asp-controller="CriminalCode" asp-action="Index">Códigos Penais</a>
     </li>
     <li class="nav-item">
         <a  class="form-inline" asp-controller="Logout" asp-action="Logout">Logout</a>

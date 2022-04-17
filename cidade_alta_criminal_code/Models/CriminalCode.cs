@@ -15,19 +15,21 @@ namespace cidade_alta_criminal_code.Models
 
         public int PrisionTime  { get; set; }
 
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
         public DateTime UpdatedDate { get; set; }
 
-        public int CreateUserId { get; set; }
+        public string CreateUserId { get; set; }
 
-        public int UpdateUserId { get; set; }
+        public string UpdateUserId { get; set; }
 
-        public virtual User CreateUser { get; set; }
+        public ApplicationUser CreateUser { get; set; }
 
-        public virtual User UpdateUser { get; set; }
+        public ApplicationUser UpdateUser { get; set; }
+
+        public Status Status { get; set; }
 
 
 
