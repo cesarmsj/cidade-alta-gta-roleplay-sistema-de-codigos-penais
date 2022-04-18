@@ -11,6 +11,8 @@ Tecnologias utilizadas:
 	<li>ASP.NET Core</li>
 	<li>Entity Framework Core</li>
 	<li>Entity Framework Identity Core</li>
+	<li>AutoMapper</li>
+	<li>FluentResults</li>
 	<li>DataTable</li>
 	<li>Conexão com SQL Server</li>
 </ul>
