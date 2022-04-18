@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Mvc;
 using cidade_alta_criminal_code.Data.Dtos.CriminalCodeDto;
 using cidade_alta_criminal_code.Services;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using cidade_alta_criminal_code.Data.Dtos.StatusDto;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +18,6 @@ namespace cidade_alta_criminal_code.Controllers
         private ApplicationDbContext _context;
         private CriminalCodeService _criminalCodeService;
         private StatusService _statusService;
-        private IMapper _mapper;
         private UserManager<ApplicationUser> _userManager;
         private ILogger _logger;
 
