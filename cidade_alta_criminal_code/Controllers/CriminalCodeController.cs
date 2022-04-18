@@ -33,9 +33,9 @@ namespace cidade_alta_criminal_code.Controllers
 
         // GET: CriminalCodes
         [Authorize]
-        public async Task<IActionResult> Index(string msg)
+        public async Task<IActionResult> Index(string msg, string ordered, string order)
         {
-            List<ReadCriminalCodeDto> readDto = _criminalCodeService.ListCriminalCodes();
+            List<ReadCriminalCodeDto> readDto = _criminalCodeService.ListCriminalCodes(ordered, order);
 
             ViewBag.Message = msg;
             ViewBag.CriminalCodes = readDto;

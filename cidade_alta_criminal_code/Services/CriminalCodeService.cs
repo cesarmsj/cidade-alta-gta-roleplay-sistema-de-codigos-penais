@@ -5,6 +5,7 @@ using cidade_alta_criminal_code.Models;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace cidade_alta_criminal_code.Services
 
@@ -62,11 +63,26 @@ namespace cidade_alta_criminal_code.Services
             return Result.Ok();
         }
 
-        public List<ReadCriminalCodeDto> ListCriminalCodes()
+        public List<ReadCriminalCodeDto> ListCriminalCodes(string ordered, string order)
         {
             List<CriminalCode> criminalCodes;
 
-            criminalCodes = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).ToList();
+            string ordered_field = ordered ?? "Name";
+
+            var orderBy = ToLambda<CriminalCode>(ordered_field);
+
+            if (order == "asc")
+            {
+                criminalCodes = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).OrderBy(orderBy).ToList();
+            }
+            else if (order == "desc")
+            {
+                criminalCodes = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).OrderByDescending(orderBy).ToList();
+            }
+            else
+            {
+                criminalCodes = _context.CriminalCodes.Include(i => i.CreateUser).Include(j => j.UpdateUser).ToList();
+            }
 
             if (criminalCodes != null)
             {
@@ -104,5 +120,14 @@ namespace cidade_alta_criminal_code.Services
             _context.SaveChanges();
             return Result.Ok();
         }
+        public static Expression<Func<T, object>> ToLambda<T>(string propertyName)
+        {
+            var parameter = Expression.Parameter(typeof(T));
+            var property = Expression.Property(parameter, propertyName);
+            var propAsObject = Expression.Convert(property, typeof(object));
+
+            return Expression.Lambda<Func<T, object>>(propAsObject, parameter);
+        }
+
     }
 }
