@@ -12,7 +12,9 @@ using cidade_alta_criminal_code.Data;
 
 namespace cidade_alta_criminal_code.Controllers
 {
-    public class CriminalCodeController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class CriminalCodeController : ControllerBase
     {
         private ApplicationDbContext _context;
         private CriminalCodeService _criminalCodeService;
@@ -53,17 +55,6 @@ namespace cidade_alta_criminal_code.Controllers
 
             return NotFound();
 
-        }
-
-        // GET: CriminalCodes/Create
-        [Authorize]
-        public IActionResult Create(string msg)
-        {
-            List<ReadStatusDto> readDto = _statusService.ListStatus();
-            ViewBag.Status = readDto;
-            ViewBag.Message = msg;
-
-            return View();
         }
 
         // POST: CriminalCodes/Create
