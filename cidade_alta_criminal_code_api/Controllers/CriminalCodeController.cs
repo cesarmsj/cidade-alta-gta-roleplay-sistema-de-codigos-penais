@@ -8,6 +8,7 @@ using cidade_alta_criminal_code.Data.Dtos.StatusDto;
 using Microsoft.AspNetCore.Identity;
 using cidade_alta_criminal_code.Models;
 using cidade_alta_criminal_code.Data;
+using AutoMapper;
 
 namespace cidade_alta_criminal_code.Controllers
 {
