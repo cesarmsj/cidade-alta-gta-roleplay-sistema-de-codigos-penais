@@ -8,6 +8,7 @@
 
 Tecnologias utilizadas:
 <ul>
+	<li>Visual Studio 2019</li>
 	<li>ASP.NET Core</li>
 	<li>Entity Framework Core</li>
 	<li>Entity Framework Identity Core</li>
