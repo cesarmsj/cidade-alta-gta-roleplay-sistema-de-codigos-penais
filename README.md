@@ -23,6 +23,7 @@ Tecnologias utilizadas:
 </h4>
 	
 <ul>
+	<li>No Console do Gerenciador de Pacotes do Visual Studio, certifique-se que está no diretório da solução e execute <i>dotnet restore</i></li>
 	<li>Você pode ter instalado em sua máquina o SQL Server (de preferência o 2019) e alterar o ID e Password em appsettings.json</li>
 	<li>No Console do Gerenciador de Pacotes do Visual Studio, execute <i>Add-Migration Inicial</i>, e em seguida <i>Update-Database</i></li>
 </ul>
