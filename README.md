@@ -17,6 +17,17 @@ Tecnologias utilizadas:
 	<li>Conexão com SQL Server</li>
 </ul>
 
+<h4 align="center"> 
+	  Instalação 
+</h4>
+	
+<ul>
+	<li>Você pode ter instalado em sua máquina o SQL Server (de preferência o 2019) e alterar o ID e Password em appsettings.json</li>
+	<li>No Console do Gerenciador de Pacotes do Visual Studio, execute <i>Add-Migration Inicial</i>, e em seguida <i>Update-Database</i></li>
+</ul>
+
 <p>Criminal Code URL: https://localhost:7138;http://localhost:5138</p>
 <p>Criminal Code API URL: https://localhost:7084;http://localhost:5084</p>
+
+
 
