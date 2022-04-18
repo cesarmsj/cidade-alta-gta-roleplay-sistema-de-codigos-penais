@@ -20,6 +20,7 @@ namespace cidade_alta_criminal_code.Controllers
         private StatusService _statusService;
         private UserManager<ApplicationUser> _userManager;
         private ILogger _logger;
+        private IMapper _mapper;
 
 
         public CriminalCodeController(CriminalCodeService criminalCodeService, IMapper mapper, StatusService statusService, UserManager<ApplicationUser> userManager, ILogger logger, ApplicationDbContext context)
